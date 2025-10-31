@@ -133,7 +133,7 @@ bragit commit --branch branchB fileB.txt --push
 
 ## 🪪 License
 
-MIT © 2025 [Your Name](https://github.com/mya-ai)
+MIT © 2025 [Andy Bell](https://github.com/mya-ai)
 
 ---
 
