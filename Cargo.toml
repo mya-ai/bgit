@@ -17,3 +17,4 @@ clap = { version = "4", features = ["derive"] }
 git2 = "0.20.2"
 camino = "1"
 pathdiff = "0.2.3"
+dialoguer = "0.11"

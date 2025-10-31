@@ -1,6 +1,7 @@
 use anyhow::{anyhow, Context, Result};
 use camino::Utf8PathBuf;
 use clap::{Parser, Subcommand};
+use dialoguer::Confirm;
 use git2::{Oid, Repository, Signature, Tree};
 use std::fs;
 use std::os::unix::fs::PermissionsExt;
@@ -9,7 +10,7 @@ use std::process::Command;
 
 #[derive(Parser, Debug)]
 #[command(
-    name = "branch-git",
+    name = "bgit",
     version,
     about = "Commit specific files directly to a target branch without switching."
 )]
@@ -218,10 +219,31 @@ fn ensure_branch_base(repo: &Repository, branch: &str, track_remote: bool) -> Re
         }
     }
 
-    Err(anyhow!(
-        "Branch '{branch}' not found locally{}",
-        if track_remote { " or on origin" } else { "" }
-    ))
+    // Branch doesn't exist - prompt user to create it
+    let create = Confirm::new()
+        .with_prompt(format!(
+            "Branch '{}' does not exist. Create it from HEAD?",
+            branch
+        ))
+        .default(true)
+        .interact()?;
+
+    if !create {
+        return Err(anyhow!(
+            "Branch '{branch}' not found locally{}",
+            if track_remote { " or on origin" } else { "" }
+        ));
+    }
+
+    // Create the branch from HEAD
+    let head = repo.head()?;
+    let head_commit = head.peel_to_commit()?;
+    repo.branch(branch, &head_commit, false)?;
+
+    let tree = head_commit.tree()?;
+    println!("✨ Created new branch '{}' from HEAD", branch);
+
+    Ok((head_commit.id(), tree.id()))
 }
 
 /// Return path a relative to base, if possible
