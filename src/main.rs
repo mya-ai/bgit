@@ -166,6 +166,21 @@ fn commit_to_branch(
         println!("🚀 Pushed {branch} to origin");
     }
 
+    // Ask user if they want to remove the file from working directory
+    let should_remove = Confirm::new()
+        .with_prompt(format!(
+            "Remove {} from working directory?",
+            rel.display()
+        ))
+        .default(false)
+        .interact()?;
+
+    if should_remove {
+        fs::remove_file(&abs_file)
+            .with_context(|| format!("Failed to remove {}", abs_file.display()))?;
+        println!("🗑️  Removed {} from working directory", rel.display());
+    }
+
     Ok(())
 }
 
