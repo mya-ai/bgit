@@ -1,8 +1,8 @@
-# bgit 🪄
+# bragit 🪄
 
-**bgit** is a Rust CLI tool that lets you commit specific files directly to target branches **without switching branches**.
+**bragit** is a Rust CLI tool that lets you commit specific files directly to target branches **without switching branches**.
 
-This tool is built on top of [libgit2](https://libgit2.org/) via the [`git2` crate](https://crates.io/crates/git2), providing a fast and native way to automate cross-branch commits in Git repositories.
+This tool is built on top of [libragit2](https://libragit2.org/) via the [`git2` crate](https://crates.io/crates/git2), providing a fast and native way to automate cross-branch commits in Git repositories.
 
 ---
 
@@ -22,16 +22,16 @@ This tool is built on top of [libgit2](https://libgit2.org/) via the [`git2` cra
 Install directly from [crates.io](https://crates.io):
 
 ```bash
-cargo install bgit
+cargo install bragit
 ```
 
 Or build from source:
 
 ```bash
-git clone https://github.com/yourusername/bgit.git
-cd bgit
+git clone https://github.com/mya-ai/bragit.git
+cd bragit
 cargo build --release
-cp target/release/bgit ~/.local/bin/
+cp target/release/bragit ~/.local/bin/
 ```
 
 ---
@@ -40,31 +40,31 @@ cp target/release/bgit ~/.local/bin/
 
 ### Commit a file directly to a branch
 ```bash
-bgit commit --branch feature/ui src/ui.rs
+bragit commit --branch feature/ui src/ui.rs
 ```
 
 ### With a custom message
 ```bash
-bgit commit --branch hotfix/login src/login.rs -m "Fix login redirect"
+bragit commit --branch hotfix/login src/login.rs -m "Fix login redirect"
 ```
 
 ### Push immediately after committing
 ```bash
-bgit commit --branch release/1.2.3 dist/app.js --push
+bragit commit --branch release/1.2.3 dist/app.js --push
 ```
 
 ### Track a remote branch if missing
 If the branch doesn’t exist locally, use `--track-remote` to seed it from `origin/BRANCH`:
 
 ```bash
-bgit commit --branch feature/experimental new/feature.rs --track-remote
+bragit commit --branch feature/experimental new/feature.rs --track-remote
 ```
 
 ---
 
 ## ⚙️ Command Reference
 ```
-bgit commit \
+bragit commit \
   --branch <BRANCH> \
   [--message <MSG>] \
   [--push] \
@@ -110,14 +110,14 @@ All without switching branches or touching your working index.
 
 ```bash
 # Commit fileA to branchA
-bgit commit --branch branchA fileA.txt -m "Update A"
+bragit commit --branch branchA fileA.txt -m "Update A"
 
 # Commit fileB to branchB
-bgit commit --branch branchB fileB.txt -m "Update B"
+bragit commit --branch branchB fileB.txt -m "Update B"
 
 # Push both
-bgit commit --branch branchA fileA.txt --push
-bgit commit --branch branchB fileB.txt --push
+bragit commit --branch branchA fileA.txt --push
+bragit commit --branch branchB fileB.txt --push
 ```
 
 ---
@@ -125,7 +125,7 @@ bgit commit --branch branchB fileB.txt --push
 ## 🔮 Roadmap
 
 - [ ] Multi-file commits per branch
-- [ ] Bulk mode: `bgit commit --map "a.txt:branchA" "b.txt:branchB"`
+- [ ] Bulk mode: `bragit commit --map "a.txt:branchA" "b.txt:branchB"`
 - [ ] Hook-aware mode using temporary worktrees
 - [ ] Dry-run / diff preview mode
 
@@ -133,7 +133,7 @@ bgit commit --branch branchB fileB.txt --push
 
 ## 🪪 License
 
-MIT © 2025 [Your Name](https://github.com/yourusername)
+MIT © 2025 [Your Name](https://github.com/mya-ai)
 
 ---
 
@@ -142,7 +142,7 @@ MIT © 2025 [Your Name](https://github.com/yourusername)
 Pull requests are welcome! If you’d like to add features or improve UX, fork the repo and submit a PR.
 
 ```bash
-git clone https://github.com/yourusername/bgit.git
-cd bgit
+git clone https://github.com/mya-ai/bragit.git
+cd bragit
 cargo run -- commit --branch test examples/demo.txt
 ```

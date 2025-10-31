@@ -10,7 +10,7 @@ use std::process::Command;
 
 #[derive(Parser, Debug)]
 #[command(
-    name = "bgit",
+    name = "bragit",
     version,
     about = "Commit specific files directly to a target branch without switching."
 )]
@@ -151,7 +151,7 @@ fn commit_to_branch(
     );
 
     if push {
-        // Use user's CLI for auth to avoid libgit2 credential plumbing
+        // Use user's CLI for auth to avoid libragit2 credential plumbing
         let status = Command::new("git")
             .arg("-C")
             .arg(workdir)
@@ -168,10 +168,7 @@ fn commit_to_branch(
 
     // Ask user if they want to remove the file from working directory
     let should_remove = Confirm::new()
-        .with_prompt(format!(
-            "Remove {} from working directory?",
-            rel.display()
-        ))
+        .with_prompt(format!("Remove {} from working directory?", rel.display()))
         .default(false)
         .interact()?;
 

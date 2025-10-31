@@ -1,11 +1,11 @@
 [package]
-name = "bgit"
+name = "bragit"
 version = "0.1.0"
 edition = "2021"
 description = "Commit specific files directly to target branches without switching."
 license = "MIT"
-repository = "https://github.com/mya-ai/bgit"
-homepage = "https://github.com/mya-ai/bgit"
+repository = "https://github.com/mya-ai/bragit"
+homepage = "https://github.com/mya-ai/bragit"
 readme = "README.md"
 keywords = ["git", "cli", "branch", "commit", "automation"]
 categories = ["command-line-utilities", "development-tools"]
@@ -17,4 +17,4 @@ clap = { version = "4", features = ["derive"] }
 git2 = "0.20.2"
 camino = "1"
 pathdiff = "0.2.3"
-dialoguer = "0.11"
+dialoguer = "0.12.0"
